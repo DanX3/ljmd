@@ -15,17 +15,18 @@
 #include "velverlet.h"
 #include "helpers.h"
 #include "output.h"
+#include "input.h"
 
 
 /* main */
 int main(int argc, char **argv)
 {
-    int nprint, i,handle_error;
+    int nprint, i;
     char restfile[BLEN], trajfile[BLEN], ergfile[BLEN], line[BLEN];
     FILE *fp,*traj,*erg;
     mdsys_t sys;
 
-    handle_error=read_input( &sys, &nprint,  restfile,  trajfile, ergfile, line);
+    read_input( &sys, &nprint,  restfile,  trajfile, ergfile, line);
     /* allocate memory */
     sys.rx=(double *)malloc(sys.natoms*sizeof(double));
     sys.ry=(double *)malloc(sys.natoms*sizeof(double));
@@ -70,7 +71,6 @@ int main(int argc, char **argv)
     /**************************************************/
     /* main MD loop */
     for(sys.nfi=1; sys.nfi <= sys.nsteps; ++sys.nfi) {
-
         /* write output, if requested */
         if ((sys.nfi % nprint) == 0)
             output(&sys, erg, traj);

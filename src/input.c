@@ -1,4 +1,5 @@
 #include "input.h"
+#include "helpers.h"
 
 /* read input file */
 int read_input(mdsys_t *sys,int *nprint, char *restfile, char *trajfile, char *ergfile, char *line){
