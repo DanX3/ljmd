@@ -40,6 +40,7 @@ void force(mdsys_t *sys) {
                 sys->fx[i] += rx/r*ffac;
                 sys->fy[i] += ry/r*ffac;
                 sys->fz[i] += rz/r*ffac;
+                printf("%f\n", sys->fx[0]);
             }
         }
     }
