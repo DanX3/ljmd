@@ -1,14 +1,14 @@
-/* 
+/*
  * simple lennard-jones potential MD code with velocity verlet.
  * units: Length=Angstrom, Mass=amu; Energy=kcal
  *
  * baseline c version.
  */
 
-#include <stdio.h>
-#include <string.h>
+//#include <stdio.h>
+//#include <string.h>
 #include <ctype.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <math.h>
 #include "force.h"
 #include "velverlet.h"
@@ -18,7 +18,7 @@
 
 
 /* main */
-int main(int argc, char **argv) 
+int main(int argc, char **argv)
 {
     int nprint, i;
     char restfile[BLEN], trajfile[BLEN], ergfile[BLEN], line[BLEN];
@@ -81,7 +81,7 @@ int main(int argc, char **argv)
     sys.nfi=0;
     force(&sys);
     ekin(&sys);
-    
+
     erg=fopen(ergfile,"w");
     traj=fopen(trajfile,"w");
 
