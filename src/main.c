@@ -15,6 +15,7 @@
 #include "velverlet.h"
 #include "helpers.h"
 #include "output.h"
+#include "input.h"
 
 
 /* main */
