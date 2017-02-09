@@ -9,20 +9,21 @@
 
 int main(int argc, char **argv)
 {
-  int nprint, i,handle_error;
+
 
   mdsys_t sys;
-  nprint=100;
+
 
   sys.natoms=2;
 
   sys.nsteps=1;
-  sys.dt=1;
+  sys.dt=5.0;
   sys.mass=39.948;
   sys.epsilon=0.2379;
   sys.sigma=3.405;
   sys.box=17.1580;
-  sys.rcut=4.5;
+  sys.rcut=8.5;
+  sys.temp=0;
   sys.rx=(double *)malloc(sys.natoms*sizeof(double));
   sys.ry=(double *)malloc(sys.natoms*sizeof(double));
   sys.rz=(double *)malloc(sys.natoms*sizeof(double));
@@ -48,32 +49,53 @@ int main(int argc, char **argv)
 
 
 
-        sys.vx[0]=-1;
+        sys.vx[0]=0;
         sys.vy[0]=0;
         sys.vz[0]=0;
 
-        sys.vx[1]=1;
+        sys.vx[1]=0;
         sys.vy[1]=0;
         sys.vz[1]=0;
+  sys.nfi=0;
+
+  double E_teoretic=0.0261;
+  printf("Starting simulation with %d atoms for %d step.\n",sys.natoms, sys.nsteps);
+  printf("     NFI            TEMP            EKIN   \n");
+  printf("  %8d   \t   %6.3f    \t  %6.3f \t\n",sys.nfi,sys.temp,sys.ekin);
+  printf("     ***** Initializing Constant force ******  \t\t  \n");
+  sys.fx[0]=10;
+  sys.fx[1]=10;
 
 
-  sys.fx[0]=-5;
-  sys.fx[1]=5;
-  ekin(&sys);
+  //printf("  %8d   \t   %6.3f    \t  %6.3f  \t   %6.3f   \t  %6.3f  \n",sys.nfi,sys.temp,sys.ekin,sys.epot,sys.ekin+sys.epot);
   /* main MD loop */
+
+  printf("     ****** Starting integration loop *******  \t\t  \n");
   for(sys.nfi=1; sys.nfi <= sys.nsteps; ++sys.nfi) {
 
-      /* write output, if requested */
-      if ((sys.nfi % nprint) == 0)
-          output(&sys, erg, traj);
-
       /* propagate system and recompute energies */
-      velverlet(&sys);
+      //velverlet(&sys);
+      int i;
+      for (i=0; i<sys.natoms; ++i) {
+          sys.vx[i] += 0.5*sys.dt / mvsq2e * sys.fx[i] / sys.mass;
+          sys.vy[i] += 0.5*sys.dt / mvsq2e * sys.fy[i] / sys.mass;
+          sys.vz[i] += 0.5*sys.dt / mvsq2e * sys.fz[i] / sys.mass;
+          sys.rx[i] += sys.dt*sys.vx[i];
+          sys.ry[i] += sys.dt*sys.vy[i];
+          sys.rz[i] += sys.dt*sys.vz[i];
+      }
+      for (i=0; i<sys.natoms; ++i) {
+          sys.vx[i] += 0.5*sys.dt / mvsq2e * sys.fx[i] / sys.mass;
+          sys.vy[i] += 0.5*sys.dt / mvsq2e * sys.fy[i] / sys.mass;
+          sys.vz[i] += 0.5*sys.dt / mvsq2e * sys.fz[i] / sys.mass;
+      }
       ekin(&sys);
+      printf("  %8d   \t   %6.3f    \t  %6.3f \t\n",sys.nfi,sys.temp,sys.ekin);
+
   }
-  printf("Starting simulation with %d atoms for %d steps.\n",sys.natoms, sys.nsteps);
-  printf("     NFI            TEMP            EKIN                 EPOT              ETOT\n");
-  output(&sys, erg, traj);
+  printf("Comparing EKIN with theoretical value..... " );
+  if (abs(sys.ekin-E_teoretic)<=0.001) printf("SUCCESS! \n" );
+  else printf("FAILED! \n" );
 
 /*
   printf("Test: single integration loop with %d atoms  at given v and f.\n",sys.natoms);

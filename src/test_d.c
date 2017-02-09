@@ -11,14 +11,14 @@
 /* main */
 int main(int argc, char **argv)
 {
-    int nprint, i;
+    int nprint;
     char restfile[BLEN], trajfile[BLEN], ergfile[BLEN], line[BLEN];
-    FILE *fp,*traj,*erg;
+
     mdsys_t sys;
 
     read_input( &sys, &nprint,  restfile,  trajfile, ergfile,line);
 
-    int test=0;
+
 
     if (sys.natoms==1) printf("atoms number..OK \n");
     else printf("atoms number..FAIL\n");
@@ -39,7 +39,7 @@ int main(int argc, char **argv)
     else printf("trajectory file..FAIL\n");
     if(strcmp(ergfile, "erg") == 0) printf("energy file..OK\n");
     else printf("energy file..FAIL\n");
-    
+
 
     if (sys.nsteps==7) printf("nsteps..OK\n");
     else printf("nsteps..FAIL\n");
