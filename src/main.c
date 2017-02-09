@@ -15,6 +15,7 @@
 #include "velverlet.h"
 #include "helpers.h"
 #include "output.h"
+#include "input.h"
 
 
 /* main */
@@ -25,7 +26,7 @@ int main(int argc, char **argv)
     FILE *fp,*traj,*erg;
     mdsys_t sys;
 
-    handle_error=read_input( &sys, &nprint,  restfile,  trajfile, ergfile, line);
+    read_input( &sys, &nprint,  restfile,  trajfile, ergfile, line);
     /* allocate memory */
     sys.rx=(double *)malloc(sys.natoms*sizeof(double));
     sys.ry=(double *)malloc(sys.natoms*sizeof(double));
