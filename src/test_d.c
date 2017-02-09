@@ -33,14 +33,13 @@ int main(int argc, char **argv)
     if (sys.box==6) printf("box..OK\n");
     else printf("box..FAIL\n");
 
-    if(strcmp(restfile, "rest") == 0) )printf("rest file..OK\n");
+    if(strcmp(restfile, "rest") == 0) printf("rest file..OK\n");
     else printf("rest file..FAIL\n");
-    if(strcmp(trajfile, "traj") == 0) )printf("trajectory file..OK\n");
+    if(strcmp(trajfile, "traj") == 0) printf("trajectory file..OK\n");
     else printf("trajectory file..FAIL\n");
-    if(strcmp(ergfile, "erg") == 0) )printf("trajectory file..OK\n");
-    else printf("trajectory file..FAIL\n");
-    if(strcmp(line, "line") == 0) )printf("line..OK\n");
-    else printf("line..FAIL\n");
+    if(strcmp(ergfile, "erg") == 0) printf("energy file..OK\n");
+    else printf("energy file..FAIL\n");
+    
 
     if (sys.nsteps==7) printf("nsteps..OK\n");
     else printf("nsteps..FAIL\n");
