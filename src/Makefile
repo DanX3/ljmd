@@ -7,7 +7,7 @@ TARGET=ljmd-serial.x
 
 all: $(TARGET)
 
-$(TARGET): helpers.o force.o main.o output.o velverlet.o
+$(TARGET): datafile.o helpers.o force.o main.o output.o velverlet.o
 	$(CC) -o $(TARGET) $(CFLAGS) $^
 
 %.o: %.c

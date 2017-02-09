@@ -7,13 +7,13 @@
 
 //#include <stdio.h>
 //#include <string.h>
-#include <ctype.h>
+//#include <ctype.h>
 #include <stdlib.h>
-#include <math.h>
+//#include <math.h>
+#include "datafile.h"
 #include "force.h"
 #include "velverlet.h"
 #include "helpers.h"
-#include "datafile.h"
 #include "output.h"
 
 
