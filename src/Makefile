@@ -1,5 +1,5 @@
 SHELL=/bin/sh
-CC=gcc
+CC=gcc -std=c99
 CFLAGS=-Wall -O3 -ffast-math -pg # -fomit-frame-pointer
 LDLIBS=-lm
 
