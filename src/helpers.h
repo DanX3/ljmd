@@ -2,6 +2,9 @@
 #define HELPERS_H
 
 #include "datafile.h"
+#include <string.h>
+#include <math.h>
+#include <ctype.h>
 
 /* generic file- or pathname buffer length */
 #define BLEN 200
