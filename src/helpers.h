@@ -5,6 +5,7 @@
 #include <string.h>
 #include <math.h>
 #include <ctype.h>
+#include <stdio.h>
 
 /* generic file- or pathname buffer length */
 #define BLEN 200
