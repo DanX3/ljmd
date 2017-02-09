@@ -48,8 +48,5 @@ $(TEST_D): datafile.o input.o helpers.o force.o test_d.o output.o velverlet.o
 
 
 clean:
-<<<<<<< HEAD
+
 	rm -f *.mod *.o $(TARGET) $(TEST_A) *~ *.x
-=======
-	rm -f *.mod *.o $(TARGET) $(TEST_A) *~
->>>>>>> test-b
