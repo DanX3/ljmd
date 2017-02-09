@@ -35,4 +35,4 @@ $(TEST_D): datafile.o input.o helpers.o force.o test_d.o output.o velverlet.o
 
 
 clean:
-	rm -f *.mod *.o $(TARGET) $(TEST_A) *~
+	rm -f *.mod *.o $(TARGET) $(TEST_A) *~ *.x
