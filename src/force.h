@@ -6,6 +6,6 @@
 #include <math.h>
 
 /* compute forces */
-static void force(mdsys_t *sys);
+void force(mdsys_t *sys);
 
 #endif

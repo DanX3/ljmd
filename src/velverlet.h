@@ -7,6 +7,6 @@
 #include <math.h>
 #include <string.h>
 
-static void velverlet(mdsys_t *sys);
+void velverlet(mdsys_t *sys);
 
 #endif

@@ -1,7 +1,7 @@
 #include "velverlet.h"
 
 /* velocity verlet */
-static void velverlet(mdsys_t *sys)
+void velverlet(mdsys_t *sys)
 {
     int i;
 
@@ -25,4 +25,3 @@ static void velverlet(mdsys_t *sys)
         sys->vz[i] += 0.5*sys->dt / mvsq2e * sys->fz[i] / sys->mass;
     }
 }
-
