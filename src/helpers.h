@@ -1,3 +1,10 @@
+#ifndef HELPERS_H
+#define HELPERS_H
+
+#include "datafile.h"
+
+/* generic file- or pathname buffer length */
+#define BLEN 200
 
 /* helper function: read a line and then return
    the first string with whitespace stripped off */
@@ -57,3 +64,4 @@ static void ekin(mdsys_t *sys)
     sys->temp = 2.0*sys->ekin/(3.0*sys->natoms-3.0)/kboltz;
 }
 
+#endif
