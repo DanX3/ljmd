@@ -14,4 +14,4 @@ $(TARGET): datafile.o input.o helpers.o force.o main.o output.o velverlet.o
 	$(CC) -c $< $(CFLAGS)
 
 clean:
-	rm -f *.mod *.o $(TARGET)
+	rm -f *.mod *.o $(TARGET) *~
