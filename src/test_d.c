@@ -20,32 +20,32 @@ int main(int argc, char **argv)
 
 
 
-    if (sys.natoms==1) printf("atoms number..OK \n");
-    else printf("atoms number..FAIL\n");
-    if (sys.mass==2) printf("atoms mass..OK\n");
-    else printf("atoms mass..FAIL\n");
-    if (sys.epsilon==3) printf("epsilon..OK\n");
-    else printf("epsilon..FAIL\n");
-    if (sys.sigma==4) printf("sigma..OK\n");
-    else printf("sigma..FAIL\n");
-    if (sys.rcut==5) printf("rcut..OK\n");
-    else printf("rcut..FAIL\n");
-    if (sys.box==6) printf("box..OK\n");
-    else printf("box..FAIL\n");
+    if (sys.natoms==1) printf("\e[32matoms number..OK \e[30m\n");
+    else printf("\e[31matoms number..FAIL\e[30m\n");
+    if (sys.mass==2) printf("\e[32matoms mass..OK\e[30m\n");
+    else printf("\e[31matoms mass..FAIL\e[30m\n");
+    if (sys.epsilon==3) printf("\e[32mepsilon..OK\e[30m\n");
+    else printf("\e[31mepsilon..FAIL\e[30m\n");
+    if (sys.sigma==4) printf("\e[32msigma..OK\e[30m\n");
+    else printf("\e[31msigma..FAIL\e[30m\n");
+    if (sys.rcut==5) printf("\e[32mrcut..OK\e[30m\n");
+    else printf("\e[31mrcut..FAIL\e[30m\n");
+    if (sys.box==6) printf("\e[32mbox..OK\e[30m\n");
+    else printf("\e[31mbox..FAIL\e[30m\n");
 
-    if(strcmp(restfile, "rest") == 0) printf("rest file..OK\n");
-    else printf("rest file..FAIL\n");
-    if(strcmp(trajfile, "traj") == 0) printf("trajectory file..OK\n");
-    else printf("trajectory file..FAIL\n");
-    if(strcmp(ergfile, "erg") == 0) printf("energy file..OK\n");
-    else printf("energy file..FAIL\n");
+    if(strcmp(restfile, "rest") == 0) printf("\e[32mrest file..OK\e[30m\n");
+    else printf("\e[31mrest file..FAIL\e[30m\n");
+    if(strcmp(trajfile, "traj") == 0) printf("\e[32mtrajectory file..OK\e[30m\n");
+    else printf("\e[31mtrajectory file..FAIL\e[30m\n");
+    if(strcmp(ergfile, "erg") == 0) printf("\e[32menergy file..OK\e[30m\n");
+    else printf("\e[31menergy file..FAIL\e[30m\n");
 
 
-    if (sys.nsteps==7) printf("nsteps..OK\n");
-    else printf("nsteps..FAIL\n");
-    if (sys.dt==8) printf("time step value..OK\n");
-    else printf("time step value..FAIL\n");
-    if (nprint==9) printf("output frequency..OK\n");
-    else printf("output frequency..FAIL\n");
+    if (sys.nsteps==7) printf("\e[32mnsteps..OK\e[30m\n");
+    else printf("\e[31mnsteps..FAIL\e[30m\n");
+    if (sys.dt==8) printf("\e[32mtime step value..OK\e[30m\n");
+    else printf("\e[31mtime step value..FAIL\e[30m\n");
+    if (nprint==9) printf("\e[32moutput frequency..OK\e[30m\n");
+    else printf("\e[31moutput frequency..FAIL\e[30m\n");
 
   }

@@ -67,6 +67,11 @@ int main(int argc, char **argv) {
     double absolute = abs(sys.ekin - correctResult);
     printf("Absolute error = %f\n", absolute);
     printf("Relative error = %6.3f%\n", absolute / correctResult);
+    if (absolute / correctResult < 1.0f) {
+        printf("\e[32m - Test 3 OK - \e[30m\n");
+    } else {
+        printf("\e[31m - Test 3 Failed - \e[30m\n");
+    }
     //erg=fopen(ergfile,"w");
     //traj=fopen(trajfile,"w");
 

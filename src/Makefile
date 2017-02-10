@@ -13,13 +13,10 @@ TEST_D=test-d.x
 .SUFFIXES:
 all: $(TARGET)
 
-
 test_a: $(TEST_A)
 test_b: $(TEST_B)
 test_c: $(TEST_C)
 test_d: $(TEST_D)
-
-
 
 $(TARGET): datafile.o input.o helpers.o force.o main.o output.o velverlet.o
 	$(CC) -o $(TARGET) $(CFLAGS) $(LDLIBS) $^
@@ -37,16 +34,15 @@ $(TEST_C): datafile.o input.o helpers.o force.o test_c.o output.o velverlet.o
 $(TEST_D): datafile.o input.o helpers.o force.o test_d.o output.o velverlet.o
 	$(CC) -o $(TEST_D) $(CFLAGS) $(LDLIBS) $^
 
-
-
+run_tests: $(TEST_A) $(TEST_B) $(TEST_C) $(TEST_D)
+	cp $(TEST_A) $(TEST_B) $(TEST_C) $(TEST_D) ../test/
+	./../test/test-a.x 
+	./../test/test-b.x 
+	./../test/test-c.x 
+	./../test/test-d.x < ../test/test-d.inp
 
 %.o: %.c
 	$(CC) -c $< $(CFLAGS)
 
-
-
-
-
 clean:
-
 	rm -f *.mod *.o $(TARGET) $(TEST_A) *~ *.x
