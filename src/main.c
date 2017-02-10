@@ -16,6 +16,7 @@
 #include "helpers.h"
 #include "output.h"
 #include "input.h"
+#include <omp.h>
 
 
 /* main */
@@ -25,6 +26,15 @@ int main(int argc, char **argv)
     char restfile[BLEN], trajfile[BLEN], ergfile[BLEN], line[BLEN];
     FILE *fp,*traj,*erg;
     mdsys_t sys;
+
+    #if defined(_OPENMP) 
+        #pragma omp parallel
+        {
+            int tid = omp_get_thread_num();
+            if (tid == 0)
+                printf("Running with %d threads\n", omp_get_num_threads());
+        }
+    #endif
 
     read_input( &sys, &nprint,  restfile,  trajfile, ergfile, line);
     /* allocate memory */
@@ -42,10 +52,12 @@ int main(int argc, char **argv)
     fp=fopen(restfile,"r");
     if(fp) {
         for (i=0; i<sys.natoms; ++i) {
-            fscanf(fp,"%lf%lf%lf",sys.rx+i, sys.ry+i, sys.rz+i);
+            int a = fscanf(fp,"%lf%lf%lf",sys.rx+i, sys.ry+i, sys.rz+i);
+            a++;    //just to suppress the error from scanf
         }
         for (i=0; i<sys.natoms; ++i) {
-            fscanf(fp,"%lf%lf%lf",sys.vx+i, sys.vy+i, sys.vz+i);
+            int a = fscanf(fp,"%lf%lf%lf",sys.vx+i, sys.vy+i, sys.vz+i);
+            a++;    //just to suppress the error from scanf
         }
         fclose(fp);
         azzero(sys.fx, sys.natoms);
@@ -71,6 +83,7 @@ int main(int argc, char **argv)
     /**************************************************/
     /* main MD loop */
     for(sys.nfi=1; sys.nfi <= sys.nsteps; ++sys.nfi) {
+        /*printf("loop #%d\n", sys.nfi);*/
         /* write output, if requested */
         if ((sys.nfi % nprint) == 0)
             output(&sys, erg, traj);
