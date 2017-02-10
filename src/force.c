@@ -1,5 +1,6 @@
 #include "datafile.h"
 #include "helpers.h"
+#include <omp.h>
 
 /* compute forces */
 void force(mdsys_t *sys) {
@@ -13,6 +14,9 @@ void force(mdsys_t *sys) {
     azzero(sys->fy,sys->natoms);
     azzero(sys->fz,sys->natoms);
 
+    #if defined (_OPENMP)
+    #pragma omp parallel for default(shared) private(i,j) 
+    #endif
     for(i=0; i < (sys->natoms); ++i) {
         for(j=0; j < (sys->natoms); ++j) {
 
@@ -30,12 +34,14 @@ void force(mdsys_t *sys) {
                 ffac = -4.0*sys->epsilon*(-12.0*pow(sys->sigma/r,12.0)/r
                                          +6*pow(sys->sigma/r,6.0)/r);
                 
+                #pragma omp critical 
+                {
                 sys->epot += 0.5*4.0*sys->epsilon*(pow(sys->sigma/r,12.0)
                                                -pow(sys->sigma/r,6.0));
-
                 sys->fx[i] += rx/r*ffac;
                 sys->fy[i] += ry/r*ffac;
                 sys->fz[i] += rz/r*ffac;
+                }
             }
         }
     }
