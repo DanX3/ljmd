@@ -14,3 +14,4 @@ The Makefile is inside the source directory.
 ### Python interface issues
 
 We have noticed that when passing the struct `sys` to a C function, inside the c enviornment all values of sys are 0. Moreover every changes inside the c environment are not passed to the `sys` variable in python.
+The manual input works fine.

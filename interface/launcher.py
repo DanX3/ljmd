@@ -12,15 +12,13 @@ clibs=CDLL(''+lib_d+'/libljmd.so')
 #("restart",c_char_p),("trajectory",c_char_p),("energies",c_char_p),\
 
 class mdsys_t (Structure):
-    pass
-
-mdsys_t .__fields__ =[("natoms",c_int),("nfi",c_int),("nsteps",c_int),\
+    _fields_ =[("natoms",c_int),("nfi",c_int),("nsteps",c_int),\
     ("dt", c_double),("mass",c_double),("epsilon", c_double),\
     ("sigma",c_double),("box",c_double),("rcut",c_double),\
     ("ekin",c_double),("epot",c_double),("temp",c_double),\
-    ("rx", c_double),("ry",c_double),("rz",c_double),\
-    ("vx", c_double),("vy",c_double),("vz",c_double),\
-    ("fx", c_double),("fy",c_double),("fz",c_double)]
+    ("rx", POINTER(c_double)),("ry",POINTER(c_double)),("rz",POINTER(c_double)),\
+    ("vx", POINTER(c_double)),("vy",POINTER(c_double)),("vz",POINTER(c_double)),\
+    ("fx", POINTER(c_double)),("fy",POINTER(c_double)),("fz",POINTER(c_double))]
 
 
 
@@ -92,9 +90,38 @@ else:
 
 # initialize forces and energies
 sys.nfi=0
-print "before force call: sys.rx[0]=  %f" % sys.rx[0]
+#print "before force call: sys.rx[0]=  %f" % sys.rx[0]
 
-clibs.force.argtypes=[POINTER(mdsys_t)]
 clibs.force(byref(sys))
-print "after force call: sys.rx[0]=  %f" % sys.rx[0]
-print "C force call does not affects sys..."
+clibs.ekin(byref(sys))
+#print "after force call: sys.rx[0]=  %f" % sys.rx[0]
+
+class File(Structure):
+    pass
+convert_file = pythonapi.PyFile_AsFile
+convert_file.restype = POINTER(File)
+convert_file.argtypes = [py_object]
+
+
+erg=open(lines[8],"w")
+traj=open(lines[7],"w")
+
+print "***** Starting simulation with %d atoms for %d steps ******" % (sys.natoms, sys.nsteps)
+print "     NFI              TEMP                EKIN                  EPOT                  ETOT\n"
+clibs.output(byref(sys),convert_file(erg),convert_file(traj))
+
+# main MD loop
+
+for i in xrange(1,sys.nsteps+1):
+    #write output if requested
+    sys.nfi=i
+    if ((sys.nfi % nprints) == 0):
+        clibs.output(byref(sys),convert_file(erg),convert_file(traj))
+    #propagate system and recompute energies
+
+    clibs.velverlet(byref(sys))
+    clibs.ekin(byref(sys))
+print "************ SIMULATION DONE ************"
+
+erg.close()
+traj.close()
