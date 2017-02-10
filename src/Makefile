@@ -46,3 +46,7 @@ run_tests: $(TEST_A) $(TEST_B) $(TEST_C) $(TEST_D)
 
 clean:
 	rm -f *.mod *.o $(TARGET) $(TEST_A) *~ *.x
+
+run:
+	cp ../examples/argon* .
+	./ljmd-serial.x < argon_108.inp
