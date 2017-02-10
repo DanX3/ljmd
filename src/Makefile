@@ -15,3 +15,7 @@ $(TARGET): datafile.o input.o helpers.o force.o main.o output.o velverlet.o
 
 clean:
 	rm -f *.mod *.o $(TARGET)
+
+run:
+	cp ../examples/argon* .
+	./ljmd-serial.x < argon_108.inp
