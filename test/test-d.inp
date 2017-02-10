@@ -1,0 +1,12 @@
+1               # natoms
+2               # mass in AMU
+3               # epsilon in kcal/mol
+4               # sigma in angstrom
+5               # rcut in angstrom
+6               # box length (in angstrom)
+rest            # restart
+traj            # trajectory
+erg             # energies
+7               # nr MD steps
+8               # MD time step (in fs)
+9               # output print frequency

@@ -25,9 +25,21 @@ with open(inFile,'r') as inp:
         line=el.partition('#')[0]
         lines.append(line)
 
-sys=_mdsys(natoms=
-
-
+sys=_mdsys(\
+natoms=lines[0],\
+mass=lines[1],\
+epsilon=lines[2],\
+sigma=lines[3],\
+rcut=lines[4],\
+box_lenght=lines[5],\
+restart=lines[6],\
+trajectory=lines[7],\
+energies=lines[8],\
+MD_steps=lines[9],\
+MD_time_steps=lines[10],\
+output_print_freq=lines[11]\
 )
 
-#sys=_mdsys(inp[0,0])
+
+
+print sys.natoms
