@@ -10,8 +10,15 @@ The Makefile is inside the source directory.
 
 - type `make run_tests` for compile and run all the tests.
 
+- type `make test_interface` for a rough test of the python interface: it produces a C_output.txt file and a py_output.txt to be compared.
+
 
 ### Python interface issues
 
-We have noticed that when passing the struct `sys` to a C function, inside the c enviornment all values of sys are 0. Moreover every changes inside the c environment are not passed to the `sys` variable in python.
-The manual input works fine.
+The python interface works correctly. It is basically a transposition of the `main.c` file inside the `\src` folder.
+
+The syntax for launching form python is:
+
+`python "path to input file"`
+
+While the output have been tested by hand (using vimdiff) to be the same of the one obtained with the C code, a rough `test_interface` can be made by the make file to produce to rough output for comparison.

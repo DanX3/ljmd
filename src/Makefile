@@ -47,6 +47,17 @@ run_tests: $(TEST_A) $(TEST_B) $(TEST_C) $(TEST_D)
 	./../test/test-c.x
 	./../test/test-d.x < ../test/test-d.inp
 
+test_interface: $(TARGET) $(SHARED_OBJ)
+	cp ../examples/argon* .
+	./ljmd-serial.x < argon_108.inp > C_output
+	cd ../interface && \
+	python launcher.py ../examples/argon_108.inp > py_output
+	cp ../interface/py_output .
+	cat C_output | tail -n +3 | head -n -1 > C_output && \
+	cat py_output | tail -n +3 | head -n -1 > py_output && \
+	echo "Now use vdiff on C_output and py_output"
+
+
 %.o: %.c
 	$(CC) -c $< $(CFLAGS) -fPIC
 
@@ -61,7 +72,7 @@ $(SHARED_OBJ): so
 
 clean:
 
-	rm -f *.mod *.o *.so $(TARGET) $(TEST_A) *~ *.x
+	rm -f *.mod *.o *.so $(TARGET) $(TEST_A) *~ *.x *.txt
 
 
 run:
