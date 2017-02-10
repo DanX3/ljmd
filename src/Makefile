@@ -3,6 +3,10 @@ CC=gcc -std=c99
 CFLAGS=-Wall -O3 -ffast-math -pg # -fomit-frame-pointer
 LDLIBS=-lm
 
+SRCS=$(find -name '*.c')
+
+	
+
 TARGET=ljmd-serial.x
 TEST_A=test-a.x
 TEST_B=test-b.x
@@ -12,6 +16,7 @@ TEST_D=test-d.x
 
 .SUFFIXES:
 all: $(TARGET)
+so: datafile.so input.so helpers.so force.so output.so velverlet.so
 
 test_a: $(TEST_A)
 test_b: $(TEST_B)
@@ -42,7 +47,12 @@ run_tests: $(TEST_A) $(TEST_B) $(TEST_C) $(TEST_D)
 	./../test/test-d.x < ../test/test-d.inp
 
 %.o: %.c
-	$(CC) -c $< $(CFLAGS)
+	$(CC) -c $< $(CFLAGS) -fPIC
+
+%.so: %.o
+	$(CC) -shared $< -o $@
+	mkdir -p ../interface/lib/
+	cp *.so ../interface/lib/
 
 clean:
-	rm -f *.mod *.o $(TARGET) $(TEST_A) *~ *.x
+	rm -f *.mod *.o *.so $(TARGET) $(TEST_A) *~ *.x

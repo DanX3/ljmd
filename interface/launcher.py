@@ -22,6 +22,7 @@ class _mdsys(Structure):
     ("fx", c_double),("fy",c_double),("fz",c_double)]
 
 
+
 inFile=argv[1]
 lines=[]
 with open(inFile,'r') as inp:
@@ -43,6 +44,7 @@ MD_steps=(int)(lines[9]),\
 MD_time_steps=(float)(lines[10]),\
 output_print_freq=(int)(lines[11])\
 )
+
 
 
 
