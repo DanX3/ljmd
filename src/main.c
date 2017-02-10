@@ -83,7 +83,8 @@ int main(int argc, char **argv)
     /**************************************************/
     /* main MD loop */
     for(sys.nfi=1; sys.nfi <= sys.nsteps; ++sys.nfi) {
-        /*printf("loop #%d\n", sys.nfi);*/
+        if (sys.nfi % 10 == 0)
+            printf("loop #%d\n", sys.nfi);
         /* write output, if requested */
         if ((sys.nfi % nprint) == 0)
             output(&sys, erg, traj);
