@@ -8,6 +8,7 @@ SRCS=$(find -name '*.c')
 	
 
 TARGET=ljmd-serial.x
+SHARED_OBJ=libljmd.so
 TEST_A=test-a.x
 TEST_B=test-b.x
 TEST_C=test-c.x
@@ -15,7 +16,7 @@ TEST_D=test-d.x
 
 
 .SUFFIXES:
-all: $(TARGET)
+all: $(TARGET) $(SHARED_OBJ)
 so: datafile.so input.so helpers.so force.so output.so velverlet.so
 
 test_a: $(TEST_A)
@@ -51,8 +52,12 @@ run_tests: $(TEST_A) $(TEST_B) $(TEST_C) $(TEST_D)
 
 %.so: %.o
 	$(CC) -shared $< -o $@
+
+$(SHARED_OBJ): so
+	$(CC) -fPIC -shared *.o -o $@
 	mkdir -p ../interface/lib/
-	cp *.so ../interface/lib/
+	cp $@ ../interface/lib/
+
 
 clean:
 	rm -f *.mod *.o *.so $(TARGET) $(TEST_A) *~ *.x
