@@ -11,7 +11,11 @@ $(TARGET): datafile.o input.o helpers.o force.o main.o output.o velverlet.o
 	$(CC) -o $(TARGET) $(CFLAGS) $^
 
 %.o: %.c
-	$(CC) -c $< $(CFLAGS)
+	$(CC) -c $< $(CFLAGS) -fPIC
+
+%.so: %.o
+	$(CC) -shared $^ -o $<
+	
 
 clean:
 	rm -f *.mod *.o $(TARGET)
