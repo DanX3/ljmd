@@ -15,7 +15,11 @@ class _mdsys(Structure):
     [("natoms",c_int),("mass",c_double),("epsilon", c_double),\
     ("sigma",c_double),("rcut",c_double),("box_lenght",c_double),\
     ("restart",c_char_p),("trajectory",c_char_p),("energies",c_char_p),\
-    ("MD_steps", c_double),("MD_time_steps",c_int),("output_print_freq",c_int)]
+    ("MD_steps", c_double),("MD_time_steps",c_int),("output_print_freq",c_int),\
+    ("ekin",c_double),("epot",c_double),("temp",c_double),\
+    ("rx", c_double),("ry",c_double),("rz",c_double),\
+    ("vx", c_double),("vy",c_double),("vz",c_double),\
+    ("fx", c_double),("fy",c_double),("fz",c_double)]
 
 
 inFile=argv[1]
@@ -26,23 +30,23 @@ with open(inFile,'r') as inp:
         lines.append(line)
 
 sys=_mdsys(\
-natoms=lines[0],\
-mass=lines[1],\
-epsilon=lines[2],\
-sigma=lines[3],\
-rcut=lines[4],\
-box_lenght=lines[5],\
+natoms=(int)(lines[0]),\
+mass=(float)(lines[1]),\
+epsilon=(float)(lines[2]),\
+sigma=(float)(lines[3]),\
+rcut=(float)(lines[4]),\
+box_lenght=(float)(lines[5]),\
 restart=lines[6],\
 trajectory=lines[7],\
 energies=lines[8],\
-MD_steps=lines[9],\
-MD_time_steps=lines[10],\
-output_print_freq=lines[11]\
+MD_steps=(int)(lines[9]),\
+MD_time_steps=(float)(lines[10]),\
+output_print_freq=(int)(lines[11])\
 )
 
 
 
-print sys.natoms
+print type(sys.natoms)
 
 
 #sys=_mdsys(inp[0,0])
