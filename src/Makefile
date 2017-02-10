@@ -1,6 +1,6 @@
 SHELL=/bin/sh
 CC=gcc -std=c99
-CFLAGS=-Wall -O3 -ffast-math -pg # -fomit-frame-pointer
+CFLAGS=-Wall -O3 -ffast-math -fopenmp # -fomit-frame-pointer
 LDLIBS=-lm
 
 TARGET=ljmd-serial.x

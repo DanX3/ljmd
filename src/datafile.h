@@ -13,7 +13,7 @@ extern const double mvsq2e; /* m*v^2 in kcal/mol */
  * about the MD system */
 
  struct _mdsys {
-     int natoms,nfi,nsteps;
+     int natoms,nfi,nsteps, nthreads;
      double dt, mass, epsilon, sigma, box, rcut;
      double ekin, epot, temp;
      double *rx, *ry, *rz;
