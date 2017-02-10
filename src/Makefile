@@ -5,7 +5,7 @@ LDLIBS=-lm
 
 SRCS=$(find -name '*.c')
 
-	
+
 
 TARGET=ljmd-serial.x
 SHARED_OBJ=libljmd.so
@@ -42,9 +42,9 @@ $(TEST_D): datafile.o input.o helpers.o force.o test_d.o output.o velverlet.o
 
 run_tests: $(TEST_A) $(TEST_B) $(TEST_C) $(TEST_D)
 	cp $(TEST_A) $(TEST_B) $(TEST_C) $(TEST_D) ../test/
-	./../test/test-a.x 
-	./../test/test-b.x 
-	./../test/test-c.x 
+	./../test/test-a.x
+	./../test/test-b.x
+	./../test/test-c.x
 	./../test/test-d.x < ../test/test-d.inp
 
 %.o: %.c
@@ -60,4 +60,10 @@ $(SHARED_OBJ): so
 
 
 clean:
+
 	rm -f *.mod *.o *.so $(TARGET) $(TEST_A) *~ *.x
+
+
+run:
+	cp ../examples/argon* .
+	./ljmd-serial.x < argon_108.inp

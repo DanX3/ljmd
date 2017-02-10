@@ -29,7 +29,6 @@ void force(mdsys_t *sys) {
             rsq = rx*rx + ry*ry + rz*rz;
 
             /* compute force and energy if within cutoff */
-
             if (rsq < rcsq) {
                 double rinv =  1.0/rsq;
                 double r6 = rinv * rinv * rinv;
@@ -39,7 +38,6 @@ void force(mdsys_t *sys) {
                 sys->fx[i] += rx*ffac; sys->fx[j] -= rx*ffac;
                 sys->fy[i] += ry*ffac; sys->fy[j] -= ry*ffac;
                 sys->fz[i] += rz*ffac; sys->fz[j] -= rz*ffac;
-
             }
         }
     }
