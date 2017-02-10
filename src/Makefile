@@ -52,9 +52,9 @@ test_interface: $(TARGET) $(SHARED_OBJ)
 	./ljmd-serial.x < argon_108.inp > C_output
 	cd ../interface && \
 	python launcher.py ../examples/argon_108.inp > py_output
-	cp ../interface/py_output .
-	cat C_output | tail -n +3 | head -n -1 > C_output && \
-	cat py_output | tail -n +3 | head -n -1 > py_output && \
+	cp ../interface/py_output ../src/
+	#cat C_output | tail -n +3 | head -n -1 > C_output
+	#cat py_output | tail -n +3 | head -n -1 > py_output
 	echo "Now use vdiff on C_output and py_output"
 
 
