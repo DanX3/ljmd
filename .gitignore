@@ -1,1 +1,7 @@
 src/*.o
+src/*.so
+test/
+
+#vim swap files
+*.sw[nop]
+*/*.sw[nop]
